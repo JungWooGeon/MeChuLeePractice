@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.practice.mechulee2.R
 
 class MenuCategoryAdapter : RecyclerView.Adapter<MenuCategoryAdapter.MyViewHolder>() {
 
     val list = ArrayList<String>()
+    var currentClickIdx = 0
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var categoryButton: AppCompatButton = itemView.findViewById(R.id.categoryButton)
@@ -24,6 +26,20 @@ class MenuCategoryAdapter : RecyclerView.Adapter<MenuCategoryAdapter.MyViewHolde
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.categoryButton.text = list[position]
+
+        if (position == currentClickIdx) {
+            holder.categoryButton.setBackgroundResource(R.drawable.clicked_button)
+            holder.categoryButton.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+        } else {
+            holder.categoryButton.setBackgroundResource(R.drawable.unclicked_button)
+            holder.categoryButton.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.defaultColor))
+        }
+
+        holder.categoryButton.setOnClickListener {
+            notifyItemChanged(currentClickIdx)
+            currentClickIdx = position
+            notifyItemChanged(currentClickIdx)
+        }
     }
 
     override fun getItemCount(): Int {
