@@ -27,7 +27,7 @@ class MenuListFragment : Fragment() {
 
     private fun initRecyclerView() {
         // 메뉴 리스트 RecyclerView
-        val menuListRecyclerViewApater = MenuListAdapter()
+        val menuListRecyclerViewAdapter = MenuListAdapter()
 
         val menuList = ArrayList<MenuInfo>().apply {
             add(MenuInfo("된장찌개", "김치, 두부, 파, 양파, 고추"))
@@ -63,16 +63,15 @@ class MenuListFragment : Fragment() {
             add(MenuInfo("된장찌개", "김치, 두부, 파, 양파, 고추"))
             add(MenuInfo("된장찌개", "김치, 두부, 파, 양파, 고추"))
             add(MenuInfo("된장찌개", "김치, 두부, 파, 양파, 고추"))
-
         }
 
-        menuList.forEach { menuListRecyclerViewApater.list.add(it) }
+        menuList.forEach { menuListRecyclerViewAdapter.list.add(it) }
 
         binding.menuListRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            adapter = menuListRecyclerViewApater
+            adapter = menuListRecyclerViewAdapter
         }
     }
 }
