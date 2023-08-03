@@ -12,7 +12,7 @@ import com.practice.mechulee2.R
 
 class MenuListAdapter : RecyclerView.Adapter<MenuListAdapter.MyViewHolder>(){
 
-    val list = ArrayList<MenuInfo>()
+    var list = ArrayList<MenuInfo>()
 
     var lastPosition = -1
 
