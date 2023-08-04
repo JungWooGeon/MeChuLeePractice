@@ -14,8 +14,6 @@ class MenuGridAdapter : RecyclerView.Adapter<MenuGridAdapter.MyViewHolder>() {
 
     var list = ArrayList<MenuInfo>()
 
-    var lastPosition = -1
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var menuTitleTextView: AppCompatTextView = itemView.findViewById(R.id.menuTitle)
     }
@@ -30,11 +28,9 @@ class MenuGridAdapter : RecyclerView.Adapter<MenuGridAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.menuTitleTextView.text = list[position].title
 
-        if (holder.adapterPosition > lastPosition) {
-            val animation: Animation =
-                AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_row)
-            holder.itemView.startAnimation(animation)
-        }
+        // recyclerview animation 효과 추가
+        val animation: Animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_row)
+        holder.itemView.startAnimation(animation)
     }
 
     override fun getItemCount(): Int {

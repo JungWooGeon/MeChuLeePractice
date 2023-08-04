@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.menuList.observe(this) { menuList ->
-            // menuList 정보 변경 감지 시 RecyclerView 갱신
+            // menuList 정보 변경 감지 시 각 Fragment 에 RecyclerView 내용 갱신
             val menuListFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MENU_LIST) as? MenuListFragment
             val menuGridFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG_MENU_GRID) as? MenuGridFragment
 
@@ -102,10 +102,11 @@ class MainActivity : AppCompatActivity() {
                 viewModel.searchMenuList(binding.menuSearchEditText.text.toString())
             }
         })
+
+        // 검색창 키보드 '검색' 아이콘 클릭 시 키보드 내리기
         binding.menuSearchEditText.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                // 키보드 내리기
                 val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(binding.menuSearchEditText.windowToken, 0)
                 handled = true

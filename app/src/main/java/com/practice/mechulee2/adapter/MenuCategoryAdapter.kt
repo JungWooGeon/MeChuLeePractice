@@ -28,14 +28,17 @@ class MenuCategoryAdapter : RecyclerView.Adapter<MenuCategoryAdapter.MyViewHolde
         holder.categoryButton.text = list[position]
 
         if (position == currentClickIdx) {
+            // 현재 position 이 현재 선택된 index 일 경우, click 색상으로 변경
             holder.categoryButton.setBackgroundResource(R.drawable.clicked_button)
             holder.categoryButton.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
         } else {
+            // 현재 position 이 현재 선택되지 않은 index 일 경우, unclick 색상으로 변경
             holder.categoryButton.setBackgroundResource(R.drawable.unclicked_button)
             holder.categoryButton.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.defaultColor))
         }
 
         holder.categoryButton.setOnClickListener {
+            // notifyItemChanged 는 대기열에 추가 되기 때문에 onClickListener 가 끝나고 한 번에 실행
             notifyItemChanged(currentClickIdx)
             currentClickIdx = position
             notifyItemChanged(currentClickIdx)
